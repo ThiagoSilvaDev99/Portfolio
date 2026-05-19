@@ -93,81 +93,67 @@ body {
     margin-bottom: 20px;
 }
 
-/* --- Seção Projetos (Cards) --- */
+/* --- Seção Projetos (Cards na Horizontal) --- */
 .cards-projetos {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: 1fr; /* Cada card ocupa 100% da largura, virando uma linha */
     gap: 20px;
 }
 
 .card {
     /* --- MUDANÇA DARK --- */
-    background-color: #2a2a2a; /* Fundo dos cards (pouco mais claro) */
-    border: 1px solid #444; /* Borda sutil */
+    background-color: #2a2a2a;
+    border: 1px solid #444;
     border-radius: 8px;
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    
+    /* Organização em coluna: Texto em cima, Botão embaixo */
     display: flex;
     flex-direction: column;
+    gap: 15px; /* Espaçamento ideal entre o fim do texto e o botão */
 }
 
-/* 1. Estado normal da imagem */
-.card-img {
-    width: 100%;            /* Ocupa a largura original do card */
-    height: auto;
-    border-radius: 8px;
-    margin: 15px 0;
-    border: 1px solid #444;
-    
-    /* ESSENCIAL: Prepara a suavidade e a posição */
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    position: relative;     /* Permite usar o z-index */
-    z-index: 1;             /* Fica na camada normal */
-}
-
-/* 2. Efeito apenas ao passar o mouse NA IMAGEM */
-.card-img:hover {
-    transform: scale(2);  /* Aumenta em 40% (ajuste conforme o gosto) */
-    z-index: 100;           /* Joga a imagem para a frente de textos e botões */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8); /* Sombra para dar profundidade */
-    border-color: #00AFFF;  /* Opcional: destaca a borda ao expandir */
-}
-
+/* Alinha os botões horizontalmente caso o projeto tenha mais de um (ex: Ver Projeto e Ver Site) */
 .card-links {
-    margin-top: auto; 
-    padding-top: 15px; 
     display: flex; 
     flex-wrap: wrap; 
     gap: 10px; 
+    justify-content: flex-start; /* Garante que fiquem sempre alinhados à esquerda */
 }
 
 .card:hover {
     transform: translateY(-5px);
     box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-    border-color: #00AFFF; /* Destaque na borda ao passar o mouse */
+    border-color: #00AFFF; /* Destaque azul na borda ao passar o mouse */
+}
+
+/* Container do texto para ajudar no alinhamento */
+.card-info {
+    flex: 1; /* Ocupa todo o espaço disponível */
 }
 
 .card h3 {
     margin-top: 0;
-    /* --- MUDANÇA DARK --- */
-    color: #00AFFF; /* Cor de destaque para títulos */
+    margin-bottom: 10px;
+    color: #00AFFF; /* Título em azul */
 }
 
 .card a {
     text-decoration: none;
-    /* --- MUDANÇA DARK --- */
-    background-color: #00AFFF; /* Fundo do botão */
-    color: #121212; /* Texto escuro para contrastar com o botão claro */
+    background-color: #00AFFF;
+    color: #121212; /* Texto escuro sobre o botão azul */
     font-weight: bold; 
-    padding: 8px 12px;
+    padding: 10px 20px;
     border-radius: 5px;
     transition: background-color 0.3s ease;
+    text-align: center;
+    white-space: nowrap;
 }
 
 .card a:hover {
-    /* --- MUDANÇA DARK --- */
-    background-color: #007BFF; /* Azul um pouco menos vibrante */
+    background-color: #007BFF; /* Azul mais escuro no hover */
     color: #fff;
 }
 
@@ -191,15 +177,6 @@ footer#contato {
     text-align: center;
     padding-top: 20px;
 }
-/*
-.links-contato a {
-    margin: 0 15px;
-    text-decoration: none;
-    
-    color: #00AFFF; 
-    font-weight: bold;
-    font-size: 18px;
-} */
 
 .links-contato a:hover {
     text-decoration: underline;
@@ -343,10 +320,3 @@ footer#contato {
     }
     
 }
-
-/* 2. Para telas médias (Tablets ou janelas menores no PC) */
-    @media (max-width: 1024px) {
-        .card-img:hover {
-            transform: scale(1.2); /* Reduzimos um pouco para não estourar */
-        }
-    }
